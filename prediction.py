@@ -1,6 +1,6 @@
 import pickle
 from collections import Counter
-
+from data_preprocess_util import dataArrange
 
 def prediction(X_raw):
     sympfile = open('symp_model','rb')
@@ -41,17 +41,3 @@ def prediction(X_raw):
     sympfile.close
     encode_file.close
 
-def dataArrange(symp_list,data_list):
-    temp_row= [0]*len(symp_list)
-    for i in symp_list:        
-        for j in data_list:
-            if(i == j):
-                t = symp_list.index(i)
-                temp_row[t] = 1
-                break
-    return temp_row
-
-def symp_process(entry):
-    entry = entry.lower()
-    entry = entry.replace(" ","")
-    return entry
