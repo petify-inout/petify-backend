@@ -2,6 +2,7 @@ import pickle
 from collections import Counter
 from data_preprocess_util import dataArrange
 
+
 def prediction(X_raw):
     sympfile = open('symp_model','rb')
     symp_list = pickle.load(sympfile)
