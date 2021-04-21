@@ -1,7 +1,8 @@
 import pickle
 from collections import Counter
-from data_preprocess_util import dataArrange
-
+from petapp.data_preprocess_util import dataArrange
+from petapp import decision_tree_scratch, db
+from petapp.models_db import Disease
 
 def prediction(X_raw):
     sympfile = open('symp_model','rb')
@@ -32,8 +33,9 @@ def prediction(X_raw):
       
         probability = i[1]
         probability/=10
-        probability *= 100        
-        temp = { "disease" : i[0], "probability" : probability}
+        probability *= 100
+        disease = Disease.query.filter_by(name=i[0]).first()
+        temp = { "disease" : disease.name,"id" : disease.id, "probability" : probability}
         disease_prediction.append(temp)
     
     return disease_prediction
